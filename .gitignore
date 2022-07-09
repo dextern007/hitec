@@ -26,3 +26,5 @@ oca/social/
 oca/stock-logistics-warehouse/
 oca/stock-logistics-workflow/
 oca/web/
+*.pyc
+oddo-dev/addons/account_banking_mandate/i18n/es_AR.po
