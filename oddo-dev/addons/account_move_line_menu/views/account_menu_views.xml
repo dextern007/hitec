@@ -1,5 +1,0 @@
-<odoo>
-    <record model="ir.ui.menu" id="account.menu_action_account_moves_all">
-        <field name="groups_id" eval="[(5,)]" />
-    </record>
-</odoo>

@@ -38,7 +38,7 @@ class ResConfigSettings(models.TransientModel):
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         ir_config = self.env['ir.config_parameter'].sudo()
-        app_system_name = ir_config.get_param('app_system_name', default='odooApp')
+        app_system_name = ir_config.get_param('app_system_name', default='App Customize')
         
         app_show_lang = True if ir_config.get_param('app_show_lang') == "True" else False
         app_show_debug = True if ir_config.get_param('app_show_debug') == "True" else False
@@ -96,14 +96,14 @@ class ResConfigSettings(models.TransientModel):
         ir_config.set_param("app_show_poweredby", self.app_show_poweredby or "False")
         
         ir_config.set_param("app_documentation_url",
-                            self.app_documentation_url or "https://www.sunpop.cn/documentation/user/13.0/en/index.html")
+                            self.app_documentation_url or "https://aaitpro.com")
         ir_config.set_param("app_documentation_dev_url",
-                            self.app_documentation_dev_url or "https://www.sunpop.cn/documentation/13.0/index.html")
-        ir_config.set_param("app_support_url", self.app_support_url or "https://www.sunpop.cn/trial/")
+                            self.app_documentation_dev_url or "https://aaitpro.com")
+        ir_config.set_param("app_support_url", self.app_support_url or "https://aaitpro.com")
         ir_config.set_param("app_account_title", self.app_account_title or "My Online Account")
-        ir_config.set_param("app_account_url", self.app_account_url or "https://www.sunpop.cn/my-account/")
-        ir_config.set_param("app_enterprise_url", self.app_enterprise_url or "https://www.sunpop.cn")
-        ir_config.set_param("app_ribbon_name", self.app_ribbon_name or "*Sunpop.cn")
+        ir_config.set_param("app_account_url", self.app_account_url or "aaitpro.com")
+        ir_config.set_param("app_enterprise_url", self.app_enterprise_url or "aaitpro.com")
+        ir_config.set_param("app_ribbon_name", self.app_ribbon_name or "*aaitpro.com")
     
     def set_module_url(self):
         sql = "UPDATE ir_module_module SET website = '%s' WHERE license like '%s' and website <> ''" % (self.app_enterprise_url, 'OEEL%')

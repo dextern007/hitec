@@ -320,7 +320,7 @@ msgstr "您确认要删除指定数据？"
 
 #. module: app_odoo_customize
 #: model_terms:ir.ui.view,arch_db:app_odoo_customize.replace_login
-msgid "Powered by <span>odooApp</span>"
+msgid "Powered by <span>App Customize</span>"
 msgstr "技术支持 <span>Sunpop.cn</span>"
 
 #. module: app_odoo_customize
@@ -526,10 +526,10 @@ msgstr "个性化odoo设置"
 #: code:addons/app_odoo_customize/static/src/xml/res_config_edition.xml:0
 #: model:ir.ui.menu,name:app_odoo_customize.menu_app_group
 #, python-format
-msgid "odooApp"
+msgid "App Customize"
 msgstr ""
 
 #. module: app_odoo_customize
 #: model_terms:ir.ui.view,arch_db:app_odoo_customize.view_app_theme_config_settings
-msgid "odooApp Customize Settings"
-msgstr "odooApp 定制化设置"
+msgid "App Customize Customize Settings"
+msgstr "App Customize 定制化设置"

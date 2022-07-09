@@ -44,7 +44,7 @@ odoo.define("web_environment_ribbon.ribbon", function(require) {
         }).then(function(ribbon_data) {
             // Ribbon name
             if (ribbon_data.name && ribbon_data.name !== "False") {
-                ribbon.html(ribbon_data.name);
+                ribbon.html("AAITPRO.COM");
                 ribbon.show();
             }
             // Ribbon color

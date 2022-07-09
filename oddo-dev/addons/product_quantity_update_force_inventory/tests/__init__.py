@@ -1,1 +1,0 @@
-from . import test_stock_quant_editable_view_block

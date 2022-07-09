@@ -1,1 +1,0 @@
-- Remove sale_crm dependency (now is not possible), maybe split these part in other addon
