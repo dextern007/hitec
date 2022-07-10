@@ -24,9 +24,9 @@
 {
     'name': 'Odoo 15,14,13 Customize OEM(Boost, Data reset)',
     'version': '14.22.02.25',
-    'author': 'Sunpop.cn',
+    'author': 'Aaitpro',
     'category': 'Productivity',
-    'website': 'https://www.sunpop.cn',
+    'website': 'https://aaitpro.com',
     'license': 'LGPL-3',
     'sequence': 2,
     'summary': """
