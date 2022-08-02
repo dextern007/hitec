@@ -62,13 +62,6 @@ class PurchaseRequest(models.Model):
     is_name_editable = fields.Boolean(
         default=lambda self: self.env.user.has_group("base.group_no_one"),
     )
-    partner_ref = fields.Char('Vendor Reference', copy=False,
-        help="Reference of the sales order or bid sent by the vendor. "
-             "It's used to do the matching when you receive the "
-             "products as this reference is usually written on the "
-             "delivery order sent by your vendor.")
-
-    partner_id = fields.Many2one('res.partner', string='Vendor', required=True, change_default=True, tracking=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]", help="You can find a vendor by its Name, TIN, Email or Internal Reference.")
     origin = fields.Char(string="Source Document")
     date_start = fields.Date(
         string="Creation date",
