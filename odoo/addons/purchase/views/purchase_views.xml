@@ -178,7 +178,7 @@
                             <field name="id" invisible="1"/>
                         </group>
                         <group>
-                            <field name="date_order" attrs="{'invisible': [('state','in',('purchase','done'))]}"/>
+                            <field string="Order Date" name="date_order" attrs="{'invisible': [('state','in',('purchase','done'))]}"/>
                             <label for="date_approve" attrs="{'invisible': [('state','not in',('purchase','done'))]}"/>
                             <div name="date_approve" attrs="{'invisible': [('state','not in',('purchase','done'))]}" class="o_row">
                                 <field name="date_approve"/>
@@ -234,7 +234,7 @@
                                         force_save="1" domain="[('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
                                     <field name="name" widget="section_and_note_text"/>
                                     <field name="date_planned" optional="hide" attrs="{'required': [('display_type', '=', False)]}" force_save="1"/>
-                                    <field name="account_analytic_id" optional="hide" context="{'default_partner_id':parent.partner_id}" groups="analytic.group_analytic_accounting" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
+                                    <field string="Cost Center" name="account_analytic_id" optional="hide" context="{'default_partner_id':parent.partner_id}" groups="analytic.group_analytic_accounting" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
                                     <field name="analytic_tag_ids" optional="hide" groups="analytic.group_analytic_tags" widget="many2many_tags" options="{'color_field': 'color'}" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
                                     <field name="product_qty"/>
                                     <field name="qty_received_manual" invisible="1"/>
@@ -275,7 +275,7 @@
                                             </group>
                                             <group>
                                                 <field name="date_planned" widget="date" attrs="{'required': [('display_type', '=', False)]}"/>
-                                                <field name="account_analytic_id" colspan="2" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                                                <field string="Cost Center" name="account_analytic_id" colspan="2" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
                                                 <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" widget="many2many_tags" options="{'color_field': 'color'}"/>
                                             </group>
                                             <group colspan="12">
@@ -515,9 +515,9 @@
                       decoration-muted="state=='cancel'" decoration-info="state in ('wait','confirmed')" sample="1">
                     <field name="priority" optional="show" widget="priority" nolabel="1"/>
                     <field name="message_unread" invisible="1"/>
-                    <field name="partner_ref" optional="hide"/>
+                    <field string="Order Reference" name="partner_ref" optional="hide"/>
                     <field name="name" string="Reference" readonly="1"/>
-                    <field name="date_order" invisible="not context.get('quotation_only', False)" optional="show"/>
+                    <field string="Order Date" name="date_order" invisible="not context.get('quotation_only', False)" optional="show"/>
                     <field name="date_approve" invisible="context.get('quotation_only', False)" optional="show"/>
                     <field name="partner_id" readonly="1"/>
                     <field name="company_id" readonly="1" options="{'no_create': True}"
@@ -557,7 +557,7 @@
                         groups="base.group_multi_company" optional="show"/>
                     <field name="date_planned" invisible="context.get('quotation_only', False)" optional="show"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
-                    <field name="date_order" attrs="{'invisible': ['|', '|', ('state', '=', 'purchase'), ('state', '=', 'done'), ('state', '=', 'cancel')]}"
+                    <field string="Order Date" name="date_order" attrs="{'invisible': ['|', '|', ('state', '=', 'purchase'), ('state', '=', 'done'), ('state', '=', 'cancel')]}"
                         invisible="not context.get('quotation_only', False)" widget="remaining_days" optional="show"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="origin" optional="show"/>
@@ -593,7 +593,7 @@
                     <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" optional="show"/>
                     <field name="date_planned" invisible="context.get('quotation_only', False)" optional="show"/>
                     <field name="user_id" widget="many2one_avatar_user" optional="show"/>
-                    <field name="date_order" invisible="not context.get('quotation_only', False)" optional="show"/>
+                    <field string="Order Date" name="date_order" invisible="not context.get('quotation_only', False)" optional="show"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="origin" optional="show"/>
                     <field name="amount_untaxed" sum="Total Untaxed amount" string="Untaxed" widget="monetary" optional="hide"/>
@@ -693,7 +693,7 @@
                         <h1>
                             <field name="order_id" class="oe_inline"/>
                             <label string="," for="date_order" attrs="{'invisible':[('date_order','=',False)]}"/>
-                            <field name="date_order" class="oe_inline"/>
+                            <field string="Order Date" name="date_order" class="oe_inline"/>
                         </h1>
                         <label for="partner_id" class="oe_edit_only"/>
                         <h2><field name="partner_id"/></h2>

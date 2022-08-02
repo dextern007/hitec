@@ -15,7 +15,7 @@ class PurchaseOrder(models.Model):
         compute="_compute_project_id",
         inverse="_inverse_project_id",
         comodel_name="account.analytic.account",
-        string="Contract / Analytic",
+        string="Contract",
         readonly=True,
         states={"draft": [("readonly", False)]},
         store=True,

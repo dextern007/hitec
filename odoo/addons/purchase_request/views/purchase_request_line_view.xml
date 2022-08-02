@@ -40,6 +40,7 @@
                 <field name="product_qty" />
                 <field name="product_uom_id" groups="uom.group_uom" />
                 <field
+                    string ="Cost Center"
                     name="analytic_account_id"
                     groups="analytic.group_analytic_accounting"
                 />
@@ -75,10 +76,10 @@
                     </h1>
                     <group name="main">
                         <group name="info">
-                            <field
+                            <!-- <field
                                 name="origin"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            />
+                            /> -->
                             <field
                                 name="requested_by"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -127,15 +128,16 @@
                                 />
                             </div>
                             <field
+                                string="Cost Center"
                                 name="analytic_account_id"
                                 groups="analytic.group_analytic_accounting"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
-                            <field
+                            <!-- <field
                                 name="analytic_tag_ids"
                                 groups="analytic.group_analytic_accounting"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            />
+                            /> -->
                             <field
                                 name="date_required"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -241,7 +243,7 @@
                     domain="[('purchase_state','=','done')]"
                     help="At least a PO has been completed"
                 />
-                <field name="analytic_account_id" />
+                <field string="Cost Center" name="analytic_account_id" />
                 <field name="cancelled" attrs="{'invisible': True}" />
                 <filter
                     name="request_state_draft"
@@ -329,7 +331,7 @@
                     />
                     <filter
                         name="analytic_account"
-                        string="Analytic Account"
+                        string="Cost Center"
                         domain="[]"
                         context="{'group_by':'analytic_account_id'}"
                     />
@@ -475,6 +477,7 @@
                                 options="{'no_create': True}"
                             />
                             <field
+                                string="Cost Center"
                                 name="account_analytic_id"
                                 attrs="{'readonly': True}"
                                 colspan="4"

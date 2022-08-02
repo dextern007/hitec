@@ -36,14 +36,14 @@
                         string="Create RFQ"
                         type="action"
                     />
-                    <button
+                    <!-- <button
                         name="button_done"
                         states="approved"
                         string="Done"
                         type="object"
                         class="oe_highlight"
                         groups="purchase_request.group_purchase_request_manager"
-                    />
+                    /> -->
                     <button
                         name="button_rejected"
                         states="to_approve,approved"
@@ -111,6 +111,7 @@
                     </h1>
                     <group>
                         <group>
+                        
                             <field
                                 name="requested_by"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -121,11 +122,11 @@
                             />
                         </group>
                         <group>
-                            <field
+                            <!-- <field
                                 name="origin"
                                 class="oe_inline"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            />
+                            /> -->
                             <field
                                 name="description"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -164,6 +165,7 @@
                                         groups="uom.group_uom"
                                     />
                                     <field
+                                        string="Cost Center"
                                         name="analytic_account_id"
                                         groups="analytic.group_analytic_accounting"
                                     />
@@ -330,6 +332,8 @@
             >
                 <field name="message_needaction" invisible="1" />
                 <field name="name" />
+                <!-- <field name="partner_id" string="Vendor" />
+                <field string="Vendor Reference" name="partner_ref" optional="hide"/> -->
                 <field name="date_start" />
                 <field name="requested_by" widget="many2one_avatar_user" />
                 <field
@@ -338,7 +342,7 @@
                     widget="selection"
                 />
                 <field name="activity_ids" widget="list_activity" optional="show" />
-                <field name="origin" />
+                <!-- <field name="origin" /> -->
                 <field name="currency_id" invisible="1" />
                 <field name="estimated_cost" optional="hide" />
                 <field
@@ -432,13 +436,13 @@
                         domain="[]"
                         context="{'group_by':'assigned_to'}"
                     />
-                    <filter
+                    <!-- <filter
                         name="source"
                         string="Source"
                         icon="fa-caret-square-o-left"
                         domain="[]"
                         context="{'group_by':'origin'}"
-                    />
+                    /> -->
                     <filter
                         name="start_date"
                         string="Start Date"

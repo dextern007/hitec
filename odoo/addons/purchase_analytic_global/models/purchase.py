@@ -9,7 +9,7 @@ class PurchaseOrder(models.Model):
 
     account_analytic_id = fields.Many2one(
         "account.analytic.account",
-        string="Analytic Account",
+        string="Cost Center",
         compute="_compute_analytic_account",
         inverse="_inverse_analytic_account",
         help="This account will be propagated to all lines, if you need "

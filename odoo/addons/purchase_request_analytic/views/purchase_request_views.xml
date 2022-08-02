@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="date_start" position="after">
                 <field
+                    string ="Cost Center"
                     name="analytic_account_id"
                     groups="analytic.group_analytic_accounting"
                 />
@@ -22,6 +23,7 @@
                 <field name="date_start" position="after">
                     <field name="analytic_account_id2" invisible="1" />
                     <field
+                        string = "Cost Center"
                         name="analytic_account_id"
                         groups="analytic.group_analytic_accounting"
                         options="{'no_create': True}"
@@ -43,13 +45,13 @@
             <xpath expr="//group" position="inside">
                 <filter
                     name="analytic_account"
-                    string="Analytic Account"
+                    string="Cost Center"
                     domain="[]"
                     context="{'group_by':'analytic_account_id'}"
                 />
             </xpath>
             <field name="state" position="after">
-                <field name="analytic_account_id" />
+                <field string="Cost Center" name="analytic_account_id" />
             </field>
         </field>
     </record>

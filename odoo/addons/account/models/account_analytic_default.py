@@ -12,7 +12,7 @@ class AccountAnalyticDefault(models.Model):
     _order = "sequence"
 
     sequence = fields.Integer(string='Sequence', help="Gives the sequence order when displaying a list of analytic distribution")
-    analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account')
+    analytic_id = fields.Many2one('account.analytic.account', string='Cost Center')
     analytic_tag_ids = fields.Many2many('account.analytic.tag', string='Analytic Tags')
     product_id = fields.Many2one('product.product', string='Product', ondelete='cascade', help="Select a product which will use analytic account specified in analytic default (e.g. create new customer invoice or Sales order if we select this product, it will automatically take this as an analytic account)")
     partner_id = fields.Many2one('res.partner', string='Partner', ondelete='cascade', help="Select a partner which will use analytic account specified in analytic default (e.g. create new customer invoice or Sales order if we select this partner, it will automatically take this as an analytic account)")
