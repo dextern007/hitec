@@ -76,10 +76,10 @@
                     </h1>
                     <group name="main">
                         <group name="info">
-                            <!-- <field
+                            <field
                                 name="origin"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            /> -->
+                            />
                             <field
                                 name="requested_by"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
@@ -133,11 +133,11 @@
                                 groups="analytic.group_analytic_accounting"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
                             />
-                            <!-- <field
+                            <field
                                 name="analytic_tag_ids"
                                 groups="analytic.group_analytic_accounting"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            /> -->
+                            />
                             <field
                                 name="date_required"
                                 attrs="{'readonly': [('is_editable','=', False)]}"

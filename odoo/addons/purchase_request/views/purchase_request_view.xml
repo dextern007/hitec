@@ -122,11 +122,11 @@
                             />
                         </group>
                         <group>
-                            <!-- <field
+                            <field
                                 name="origin"
                                 class="oe_inline"
                                 attrs="{'readonly': [('is_editable','=', False)]}"
-                            /> -->
+                            />
                             <field
                                 name="description"
                                 attrs="{'readonly': [('is_editable','=', False)]}"

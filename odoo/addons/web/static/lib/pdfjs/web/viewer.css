@@ -282,13 +282,14 @@
 
 .pdfViewer .page {
   direction: ltr;
+  float: right;
   width: 816px;
   height: 1056px;
   margin: 1px auto -8px auto;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   border: 9px solid transparent;
-  background-clip: content-box;
+  /* background-clip: content-box; */
   -webkit-border-image: url(images/shadow.png) 9 9 repeat;
        -o-border-image: url(images/shadow.png) 9 9 repeat;
           border-image: url(images/shadow.png) 9 9 repeat;

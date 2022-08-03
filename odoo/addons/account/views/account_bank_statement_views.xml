@@ -235,7 +235,8 @@
                     </group>
                     <div class="oe_clear"/>
                 </sheet>
-                <div class="o_attachment_preview"/>
+                <div class="o_attachment_preview" 
+                 options="{types: ['image', 'pdf'], 'order': 'desc'}" />
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids"/>
