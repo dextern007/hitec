@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="root_menu"
+        name="AAIT OCR API"
+        parent="base.menu_custom"
+    />
+    <menuitem
+        id="onestein_api_config_menu"
+        name="OCR API Configuration"
+        parent="root_menu"
+        action="onestein_api_config_action"
+    />
+</odoo>

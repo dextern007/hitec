@@ -53,6 +53,21 @@ class PurchaseRequest(models.Model):
             else:
                 rec.is_editable = True
 
+    READONLY_STATES = {
+        'purchase': [('readonly', True)],
+        'done': [('readonly', True)],
+        'cancel': [('readonly', True)],
+    }
+
+   
+    partner_ref = fields.Char('Vendor Reference', copy=False,
+        help="Reference of the sales order or bid sent by the vendor. "
+             "It's used to do the matching when you receive the "
+             "products as this reference is usually written on the "
+             "delivery order sent by your vendor.")
+
+    vendor_id = fields.Many2one('res.partner', string='Vendor', required=True, states=READONLY_STATES, change_default=True, tracking=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]", help="You can find a vendor by its Name, TIN, Email or Internal Reference.")
+
     name = fields.Char(
         string="Request Reference",
         required=True,
