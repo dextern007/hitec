@@ -22,10 +22,11 @@ class IrAttachment(models.Model):
         if self.parsed_content:
             return json.loads(self.parsed_content)
 
-        print(self.datas.decode("utf-8"))
+        # print(self.datas.decode("utf-8"))
         res = self.env["onestein.api.config"].get().ocr_invoice(
            self.datas.decode("utf-8")
         )
         # self.parsed_content = json.dumps(res["predicted_data"])
         # self.index_content = res["txt"]
-        return res["predicted_data"]
+        
+        return res["trained_out"]

@@ -55,7 +55,7 @@ class OnesteinAPIConfig(models.Model):
             **kwargs
         )
         res = response.json()
-        # print(res["predicted_data"])
+
         # print(response)
         if not response.ok:
             message = re.sub('<[^<]+?>', '', res.get("description", res["name"]))

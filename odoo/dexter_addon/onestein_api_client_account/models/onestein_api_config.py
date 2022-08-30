@@ -14,5 +14,5 @@ class OnesteinAPIConfig(models.Model):
         }), headers={
             "Content-Type": "application/json"
         })
-        print(res)
+        # print(res)
         return res

@@ -64,6 +64,7 @@ class AccountMove(models.Model):
 
     def _update_invoice_from_onestein_api_response(self, data):
         self.ensure_one()
+        print(data)
 
         dict_lines = data.get("lines", {})
         if isinstance(dict_lines, list) and dict_lines:
@@ -71,11 +72,11 @@ class AccountMove(models.Model):
             dict_lines = dict_lines[0].get("lineitems")
 
         currency = self.env["res.currency"].search(
-            [("name", "=", data.get("currency"))], limit=1
+            [("name", "=", data.get("CURRENCY"))], limit=1
         )
         invoice_date = (
-            datetime.strptime(data.get("date"), "%Y-%m-%dT%H:%M:%S")
-            if data.get("date")
+            datetime.strptime(data.get("invoice_date"), "%d-%m-%YT%H:%M:%S")
+            if data.get("invoice_date")
             else False
         )
         purchase_date = (
@@ -88,7 +89,7 @@ class AccountMove(models.Model):
             if data.get("payment_due_date")
             else False
         )
-        invoice_number = data.get("invoice_number")[1]
+        invoice_number = data.get("INVOICE_NUMBER")
         partner = self._onestein_api_ocr_match_partner(data)
         partner_bank = self._onestein_api_ocr_match_partner_bank(partner, data)
         with Form(self) as invoice_form:
@@ -220,18 +221,18 @@ class AccountMove(models.Model):
 
         website_domain = False
         email_domain = False
-        if data.get("merchant_email") and "@" in data["merchant_email"]:
+        if data.get("VENDOR_EMAIL") and "@" in data["VENDOR_EMAIL"]:
             partner = self.env["res.partner"].search(
-                domain + [("email", "=ilike", data["merchant_email"])],
+                domain + [("email", "=ilike", data["VENDOR_EMAIL"])],
                 limit=1,
                 order=order,
             )
             if partner:
                 return partner
             else:
-                email_domain = data["merchant_email"].split("@")[1]
-        if data.get("merchant_website"):
-            urlp = urlparse(data["merchant_website"])
+                email_domain = data["VENDOR_EMAIL"].split("@")[1]
+        if data.get("VENDOR_WEBSITE"):
+            urlp = urlparse(data["VENDOR_WEBSITE"])
             netloc = urlp.netloc
             if not urlp.scheme and not netloc:
                 netloc = urlp.path
@@ -267,9 +268,9 @@ class AccountMove(models.Model):
             else:
                 pass
                 # TODO warning
-        if data.get("merchant_name"):
+        if data.get("VENDOR_NAME"):
             partner = self.env["res.partner"].search(
-                domain + [("name", "=ilike", data["merchant_name"])],
+                domain + [("name", "=ilike", data["VENDOR_NAME"])],
                 limit=1,
                 order=order,
             )
@@ -278,9 +279,9 @@ class AccountMove(models.Model):
             else:
                 pass
                 # TODO warning
-        if data.get("merchant_phone"):
+        if data.get("VENDOR_MOBILE"):
             partner = self.env["res.partner"].search(
-                domain + [("phone", "=", data["merchant_phone"])], limit=1, order=order
+                domain + [("phone", "=", data["VENDOR_MOBILE"])], limit=1, order=order
             )
             if partner:
                 return partner
