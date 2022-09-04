@@ -10,9 +10,9 @@ class OnesteinAPIConfig(models.Model):
     def ocr_invoice(self, document):
         res = self._request("POST", "/invoice-ocr/", data=json.dumps({
             "document": document,
-            "lang": "eng",
+            "lang": "chi_sim",
         }), headers={
             "Content-Type": "application/json"
         })
-        # print(res)
+        print(res)
         return res

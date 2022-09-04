@@ -64,7 +64,7 @@ class AccountMove(models.Model):
 
     def _update_invoice_from_onestein_api_response(self, data):
         self.ensure_one()
-        print(data)
+        # print(data)
 
         dict_lines = data.get("lines", {})
         if isinstance(dict_lines, list) and dict_lines:
