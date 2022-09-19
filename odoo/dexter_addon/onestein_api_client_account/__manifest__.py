@@ -6,7 +6,9 @@
     "license": "LGPL-3",
     "depends": [
         "onestein_api_client",
-        "account"
+        "account",
+        "stock",
+        "purchase"
     ],
     "data": [
         "views/res_partner.xml",

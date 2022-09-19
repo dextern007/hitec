@@ -12,18 +12,19 @@ class OnesteinAPIConfig(models.Model):
         # Place that email in got_email
 
         got_email = source_email
+
         if got_email == False:
             partner_config = None
 
         else:
             partner_id = self.env['res.partner'].search([('email', '=', got_email)], limit=1)
 
-            # Once you get the partner by this you can get your parameter.
-
-            partner_config = partner_id.partner_config
+        # Once you get the partner by this you can get your parameter.
+            
+            partner_config = partner_id.partner_config if partner_id else False
         res = self._request("POST", "/invoice-ocr/", data=json.dumps({
             "document": document,
-            "lang": "eng",
+            "lang": "chi_sim",
             "config": partner_config,
         }), headers={
             "Content-Type": "application/json"

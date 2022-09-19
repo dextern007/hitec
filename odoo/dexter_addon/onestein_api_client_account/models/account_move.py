@@ -95,7 +95,7 @@ class AccountMove(models.Model):
                 self.partner_id = partner
 
         # datetime.strptime(data.get("invoice_date"), "%d-%m-%YT%H:%M:%S")
-        if data.get("invoice_date"):
+        if data.get("INVOICE_DATE"):
             self.invoice_date = datetime.strptime(data.get("INVOICE_DATE"), '%d/%m/%Y').date()
 
         for line in lines:
@@ -117,15 +117,22 @@ class AccountMove(models.Model):
                  'account_id': self.env['account.account'].search([('name', '=', 'Expenses')], limit=1).id,
                  'partner_id': self.partner_id.id,
                  'journal_id': self.journal_id.id,
-                 'tax_fiscal_country_id': self.company_id.id
+                 'tax_fiscal_country_id': self.company_id.id,
+                 'tax_ids': False
                  }
             )
             account_line._onchange_mark_recompute_taxes()
             account_line._onchange_mark_recompute_taxes_analytic()
-            account_line._onchange_product_id()
-            account_line._onchange_uom_id()
             account_line._onchange_balance()
-            account_line._onchange_debit()
+
+        if data.get("PO_NUMBER"):
+            self.invoice_origin = data.get("PO_NUMBER")
+            purchase_order = self.env['purchase.order'].search([('name', '=', 'P00009')], limit=1)
+            if purchase_order:
+                if purchase_order.amount_total == self.amount_total and purchase_order.state in ['purchase', 'done']:
+                    picking_id = purchase_order.picking_ids.filtered(lambda line: line.state not in ['done'])
+                    if not picking_id:
+                        self.action_post()
 
         # currency = self.env["res.currency"].search(
         #     [("name", "=", data.get("CURRENCY"))], limit=1
