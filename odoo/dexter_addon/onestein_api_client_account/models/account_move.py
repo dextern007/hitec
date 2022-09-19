@@ -122,13 +122,27 @@ class AccountMove(models.Model):
                  }
             )
             account_line._onchange_mark_recompute_taxes()
-            account_line._onchange_mark_recompute_taxes_analytic()
             account_line._onchange_balance()
+
 
         if data.get("PO_NUMBER"):
             self.invoice_origin = data.get("PO_NUMBER")
-            purchase_order = self.env['purchase.order'].search([('name', '=', 'P00009')], limit=1)
-            if purchase_order:
+            purchase_order = self.env['purchase.order'].search([('name', '=', data.get("PO_NUMBER"))], limit=1)
+            product_dict = {}
+            for line in purchase_order.order_line:
+                product_dict[line.product_id.id] = [line.product_qty, line.price_unit]
+
+            same_lines = False
+            for line in self.invoice_line_ids:
+                if line.product_id and product_dict.get(line.product_id.id) \
+                        and line.quantity == product_dict[line.product_id.id][0]\
+                        and line.price_unit == product_dict[line.product_id.id][1]:
+                    same_lines = True
+                else:
+                    same_lines = False
+                    break
+
+            if purchase_order and same_lines:
                 if purchase_order.amount_total == self.amount_total and purchase_order.state in ['purchase', 'done']:
                     picking_id = purchase_order.picking_ids.filtered(lambda line: line.state not in ['done'])
                     if not picking_id:

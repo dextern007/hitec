@@ -18,9 +18,7 @@ class OnesteinAPIConfig(models.Model):
 
         else:
             partner_id = self.env['res.partner'].search([('email', '=', got_email)], limit=1)
-
         # Once you get the partner by this you can get your parameter.
-            
             partner_config = partner_id.partner_config if partner_id else False
         res = self._request("POST", "/invoice-ocr/", data=json.dumps({
             "document": document,
