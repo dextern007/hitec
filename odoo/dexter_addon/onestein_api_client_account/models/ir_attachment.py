@@ -17,16 +17,16 @@ class IrAttachment(models.Model):
             move = self.env[self.res_model].browse(self.res_id)
             move.auto_upload_onestein_api()
 
-    def _onestein_api_parse_document(self):
+    def _onestein_api_parse_document(self, source_email):
         self.ensure_one()
         if self.parsed_content:
             return json.loads(self.parsed_content)
 
         # print(self.datas.decode("utf-8"))
         res = self.env["onestein.api.config"].get().ocr_invoice(
-           self.datas.decode("utf-8")
+           source_email, self.datas.decode("utf-8")
         )
         # self.parsed_content = json.dumps(res["predicted_data"])
         # self.index_content = res["txt"]
         
-        return res["trained_out"]
+        return res

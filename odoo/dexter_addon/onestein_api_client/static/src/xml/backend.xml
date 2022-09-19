@@ -3,7 +3,7 @@
     <t t-name="onestein_api_client.CreditBalance">
         <div class="">
             <span class="font-weight-bold text-o-color-1">(</span>
-            <t t-esc="widget.credits" /> credits left <a href="https://api.onestein.eu/shop">Buy now</a>
+            <t t-esc="widget.credits" />  <a href="https://www.aaitpro.com">Buy now</a>
             <span class="font-weight-bold text-o-color-1">)</span>
         </div>
     </t>

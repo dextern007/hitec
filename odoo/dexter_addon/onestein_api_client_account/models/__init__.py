@@ -3,3 +3,4 @@ from . import ir_attachment
 from . import res_company
 from . import res_config_settings
 from . import onestein_api_config
+from . import res_partner

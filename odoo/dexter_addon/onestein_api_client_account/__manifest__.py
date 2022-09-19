@@ -9,6 +9,7 @@
         "account"
     ],
     "data": [
+        "views/res_partner.xml",
         "views/account_move.xml",
         "views/res_config_settings.xml"
     ],

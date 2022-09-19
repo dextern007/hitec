@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--overwrite purchase menu for groups -->
+    <menuitem name="Purchase"
+            id="purchase.menu_purchase_root"
+            groups="purchase.group_purchase_manager,purchase.group_purchase_user,group_purchase_request_by_employee_user"
+            web_icon="purchase,static/description/icon.png"
+            sequence="25"/>
+
+    <menuitem id="purchase.menu_procurement_management" name="Purchase"
+            groups="purchase.group_purchase_manager,purchase.group_purchase_user"
+            parent="purchase.menu_purchase_root" sequence="1" />
+
+    <menuitem id="purchase.menu_purchase_control" name="Control" parent="purchase.menu_purchase_root" 
+        groups="purchase.group_purchase_manager,purchase.group_purchase_user"
+        sequence="4"/>
+
+    <!-- overwrite purchase menu for groups -->
+
+    <record id="purchase_request_action" model="ir.actions.act_window">
+        <field name="name">Purchase Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="domain">[]</field>
+    </record>
+
+
+    <menuitem id="menu_purchase_request" name="Purchase Request"
+            parent="purchase.menu_purchase_root"
+            groups="group_purchase_request_by_employee_user" sequence="1" />
+
+    <menuitem id="sub_menu_purchase_requests" name="Requests"
+            action = "purchase_request_action"
+            parent="menu_purchase_request"
+            sequence="1" />
+
+    <record id="purchase_request_form" model="ir.ui.view">
+        <field name="name">purchase.request.form</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Request">
+            <header>
+                <field name="create_po_btn_visible" invisible="1"/>
+                <field name="approve_btn_visible" invisible="1"/>
+                <button name="button_approve" type="object"  string="Approve" class="oe_highlight" attrs="{'invisible':[('approve_btn_visible','=',True)]}"/>
+                <button name="create_po_btn" type="object"  string="Create PO" class="oe_highlight" 
+                    attrs="{'invisible':[('create_po_btn_visible','=',True)]}" groups="purchase.group_purchase_user"/>
+                <field name="stage_id" widget="statusbar" readonly="1"/>
+            </header>
+            <sheet>
+                 <div class="oe_button_box" name="button_box">
+                    <button type="object"  name="action_view_purchase_order"
+                        class="oe_stat_button"  groups="purchase.group_purchase_user"
+                        icon="fa-shopping-cart" attrs="{'invisible':[('purchase_ids','=',[])]}">
+                        <field name='purchase_ids' string="Purchases"   widget="statinfo" />
+                    </button>
+                </div>
+                <div class="oe_title">
+                    <span class="o_form_label" string="Purchase Request" />
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="partner_id" widget="res_partner_many2one" context="{'show_vat': True}" 
+                        />
+                        <field name="date_order"/>
+                        
+                    </group>
+                    <group>
+                        <field name="request_by" widget="radio" options="{'horizontal': true}"/>
+                        <field name="user_id" attrs="{'invisible':[('request_by','!=','user')]}"/>
+                        <field name="employee_id" attrs="{'invisible':[('request_by','=','user')]}"/>   
+                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>                     
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Products">
+                        <div>
+                            <field name="line_ids" >
+                                <tree string="Purchase Request Lines" editable="bottom">
+                                    <field name="product_id" context="{'partner_id':parent.partner_id, 'quantity':product_qty,'uom':product_uom, 'company_id': parent.company_id}" force_save="1"/>
+                                    <field name="name" required="1"/>
+                                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                    <field name="product_qty"/>
+                                    <field name="product_uom" groups="uom.group_uom"  force_save="1"/>
+                                </tree>
+                                <form string="Purchase Request Line">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="product_id"
+                                                       context="{'partner_id': parent.partner_id}"/>
+                                                <label for="product_qty"/>
+                                                <div>
+                                                    <field name="product_qty" class="oe_inline"/>
+                                                    <span class="oe_inline">&#160;</span>
+                                                    <field name="product_uom" groups="uom.group_uom" class="oe_inline"/>
+                                                </div>
+                                            </group>
+                                            <group>
+                                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                            </group>
+                                        </group>
+                                        <notebook>
+                                            <page string="Notes">
+                                                <field name="name"/>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </div>
+                       
+                        <field name="description" class="oe_inline" placeholder="Details ..."/>
+                        <div class="oe_clear"/>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_request_tree" model="ir.ui.view">
+        <field name="name">purchase.request.tree</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <tree decoration-bf="message_unread==True"  string="Purchase Request">
+                <field name="message_unread" invisible="1"/>
+                <field name="name" string="Reference"/>
+                <field name="date_order" />
+                <field name="partner_id"/>
+                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                <field name="user_id"/>
+                <field name="stage_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    
+    <record id="purchase_request_stage_action" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request.stage</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <menuitem id="menu_purchase_request_stage" name="Stages"
+            action = "purchase_request_stage_action"
+            parent="menu_purchase_request" />
+    
+
+    <record model="ir.ui.view" id="view_purchase_request_stage_tree">
+        <field name="name">purchase.request.stage.tree</field>
+        <field name="model">purchase.request.stage</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Agreement Stages">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="create_po" />
+                <field name="parent_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_request_stage_form">
+        <field name="name">purchase.request.stage.form</field>
+        <field name="model">purchase.request.stage</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Agreement Stages">
+            <sheet>
+                <group>
+                    <group >
+                        <field name="name"/>
+                        <field name="create_po" />
+                    </group>
+                    <group>
+                        <field name="final_stage" />
+                        <field name="parent_id" attrs="{'invisible':[('final_stage','=',True)],'required':[('final_stage','=',False)]}"/>
+                        <field name="group_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+       
+</odoo>
