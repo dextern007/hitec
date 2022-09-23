@@ -10,6 +10,17 @@ from odoo.tests.common import Form
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    ocr_is_done = fields.Boolean(default=False)
+
+    def process_ocr_queue(self):
+        invoice_id = self.env['account.move'].search([('ocr_is_done', '=', False), ('move_type', '=', 'in_invoice')])
+        for invoice in invoice_id:
+            try:
+                invoice.button_onestein_api_ocr_upload()
+                invoice.ocr_is_done = True
+            except:
+                print('None')
+
     @api.model
     def get_onestein_api_credit_balance(self):
         if not self.env.user.has_group("account.group_account_invoice"):
