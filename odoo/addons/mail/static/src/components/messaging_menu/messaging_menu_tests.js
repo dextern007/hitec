@@ -892,7 +892,7 @@ QUnit.test('<br/> tags in message body preview are transformed in spaces', async
     );
 });
 
-QUnit.test('rendering with OdooBot has a request (default)', async function (assert) {
+QUnit.test('rendering with Bot has a request (default)', async function (assert) {
     assert.expect(4);
 
     await this.start({
@@ -907,7 +907,7 @@ QUnit.test('rendering with OdooBot has a request (default)', async function (ass
 
     assert.ok(
         document.querySelector('.o_MessagingMenu_counter'),
-        "should display a notification counter next to the messaging menu for OdooBot request"
+        "should display a notification counter next to the messaging menu for Bot request"
     );
     assert.strictEqual(
         document.querySelector('.o_MessagingMenu_counter').textContent,
@@ -925,12 +925,12 @@ QUnit.test('rendering with OdooBot has a request (default)', async function (ass
     );
     assert.strictEqual(
         document.querySelector('.o_NotificationRequest_name').textContent.trim(),
-        'OdooBot has a request',
-        "notification should display that OdooBot has a request"
+        'Bot has a request',
+        "notification should display that Bot has a request"
     );
 });
 
-QUnit.test('rendering without OdooBot has a request (denied)', async function (assert) {
+QUnit.test('rendering without Bot has a request (denied)', async function (assert) {
     assert.expect(2);
 
     await this.start({
@@ -959,7 +959,7 @@ QUnit.test('rendering without OdooBot has a request (denied)', async function (a
     );
 });
 
-QUnit.test('rendering without OdooBot has a request (accepted)', async function (assert) {
+QUnit.test('rendering without Bot has a request (accepted)', async function (assert) {
     assert.expect(2);
 
     await this.start({

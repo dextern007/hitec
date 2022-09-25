@@ -3,8 +3,8 @@
     <data noupdate="1">
 
         <record id="base.partner_root" model="res.partner">
-            <field name="name">OdooBot</field>
-            <field name="email">odoobot@example.com</field>
+            <field name="name">Bot</field>
+            <field name="email">bot@example.com</field>
             <field name="image_1920" type="base64" file="mail/static/src/img/odoobot.png"/>
         </record>
 
