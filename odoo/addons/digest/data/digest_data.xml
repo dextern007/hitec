@@ -375,7 +375,7 @@
                 <t t-raw="preference"/>
             </div>
             <div class="by_odoo">
-                Sent by <a href="https://www.odoo.com" target="_blank" class="odoo_link"><span class="odoo_link_text">Odoo</span></a> –
+                Sent by <a href="https://www.aaitpro.com" target="_blank" class="odoo_link"><span class="odoo_link_text">Odoo</span></a> –
                 <a t-att-href="'/web#view_type=form&amp;model=digest.digest&amp;id=%s' % object.id" target="_blank" style="text-decoration: none;"><span style="color: #8f8f8f;">Unsubscribe</span></a>
             </div>
         </div>
@@ -388,7 +388,7 @@
 <div class="global_layout" id="footer">
     <p style="font-weight: bold;" t-esc="company.name"/>
     <p class="by_odoo" id="powered">
-        Powered by <a href="https://www.odoo.com" target="_blank" class="odoo_link"><span class="odoo_link_text">Odoo</span></a>
+        Powered by <a href="https://www.aaitpro.com" target="_blank" class="odoo_link"><span class="odoo_link_text">Aait</span></a>
     </p>
 </div>
 </div>
@@ -400,17 +400,10 @@
     <!-- MOBILE BANNER -->
     <template id="digest_section_mobile">
 <div class="global_layout" style="overflow: auto;">
-    <div style="width: 50%; float: left; text-align: right;">
-        <img src="https://www.odoo.com/web/image/24717933/odoo-mobile.png" alt="Odoo Mobile" />
-    </div>
+
     <div style="width: 50%; float: left;">
-        <p class="run_business">Run your business from anywhere with <b>Odoo Mobile</b>.</p>
-        <div>
-            <a href="https://play.google.com/store/apps/details?id=com.odoo.mobile" target="_blank"><img class="download_app" src="https://www.odoo.com/digest/static/src/img/google_play.png" /></a>
-        </div>
-        <div>
-            <a href="https://itunes.apple.com/us/app/odoo/id1272543640" target="_blank"><img class="download_app" src="https://www.odoo.com/digest/static/src/img/app_store.png" /></a>
-        </div>
+        <p class="run_business">Run your business from anywhere .</p>
+
     </div>
 </div>
     </template>
