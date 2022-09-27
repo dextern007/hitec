@@ -8,7 +8,7 @@
             <xpath expr="//header" position="inside">
                 <button name="button_onestein_api_ocr_upload"
                         type="object"
-                        string="READ INVOICE"
+                        string="AAIT OCR API"
                         attrs="{'invisible':['|', ('state', '!=', 'draft'), ('move_type', 'not in', ('in_invoice', 'in_refund'))]}"
                         groups="account.group_account_invoice"
                 />

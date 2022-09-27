@@ -14,12 +14,19 @@ class AccountMove(models.Model):
 
     def process_ocr_queue(self):
         invoice_id = self.env['account.move'].search([('ocr_is_done', '=', False), ('move_type', '=', 'in_invoice')])
+
         for invoice in invoice_id:
+            attachment = invoice._get_attachment_for_onestein_api_ocr()
+            if not attachment:
+                invoice.ocr_is_done = True
+                continue
+
             try:
                 invoice.button_onestein_api_ocr_upload()
                 invoice.ocr_is_done = True
-            except:
-                print('None')
+            except(Exception) as error:
+                if error.name == 'You can only import data to Vendor Bills in draft status':
+                    invoice.ocr_is_done = True
 
     @api.model
     def get_onestein_api_credit_balance(self):
@@ -36,7 +43,7 @@ class AccountMove(models.Model):
     def button_onestein_api_ocr_upload(self):
         self.ensure_one()
         if not self.is_purchase_document():
-            raise UserError(_("Only Vendor Bills can be imported by the AAIT OCR API    "))
+            raise UserError(_("Only Vendor Bills can be imported by the AAIT OCR API"))
 
         if self.state != "draft":
             raise UserError(
