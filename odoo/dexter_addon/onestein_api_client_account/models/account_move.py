@@ -90,31 +90,31 @@ class AccountMove(models.Model):
             dict_lines = dict_lines[0].get("lineitems")
         lines = data.get('line_items')
 
-        invoice_number = data.get("INVOICE_NUMBER")
+        invoice_number = data.get("invoice_number")
         if invoice_number:
             self.name = invoice_number
 
-        partner = data.get("VENDOR_NAME")
+        partner = data.get("supplier")
         if partner:
             partner = self.env['res.partner'].search([('name', '=', partner)], limit=1).id
             if partner:
                 self.partner_id = partner
 
-        partner_email = data.get("VENDOR_EMAIL")
+        partner_email = data["trained"]["VENDOR_EMAIL"]
         if partner_email:
             partner = self.env['res.partner'].search([('email', '=', partner_email)], limit=1).id
             if partner:
                 self.partner_id = partner
 
-        partner_vat = data.get("VAT_NUMBER")
+        partner_vat =  data["trained"]["VAT_NUMBER"]
         if partner_email:
             partner = self.env['res.partner'].search([('vat', '=', partner_vat)], limit=1).id
             if partner:
                 self.partner_id = partner
 
         # datetime.strptime(data.get("invoice_date"), "%d-%m-%YT%H:%M:%S")
-        if data.get("INVOICE_DATE"):
-            self.invoice_date = datetime.strptime(data.get("INVOICE_DATE"), '%d/%m/%Y').date()
+        if data.get("date"):
+            self.invoice_date = datetime.strptime(data.get("date"), '%Y/%m/%s').date()
 
         for line in lines:
             product_id = False
