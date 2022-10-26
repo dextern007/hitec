@@ -22,7 +22,7 @@ class OnesteinAPIConfig(models.Model):
 
     @api.model
     def _base_url(self):
-        return "http://38.130.130.45:9595"
+        return "http://127.0.0.1:8000"
 
     def get(self):
         domain = [
